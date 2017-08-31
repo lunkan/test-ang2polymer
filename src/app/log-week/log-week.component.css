@@ -1,0 +1,9 @@
+:host >>> h2 {
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+	padding: 8px 16px;
+	color: #666;
+	margin: 24px 0 0;
+};

@@ -1,0 +1,39 @@
+<div *ngIf="form">
+	<app-modal *appModalTransclude="let description=description" (onModalInit)="onModalInit($event)">
+		<p slot-headline>Edit: {{form.src.id}}</p>
+		<div slot-body>
+			<div>
+				<div>Tja: {{description}}</div>
+			</div>
+		  <div class="form-field-group">
+			  <div class="form-field">
+			  	<label for="date">Date</label>
+			  	<input name="date" [(ngModel)]="form.date">
+			  </div>
+			  <div class="form-field">
+			  	<label for="preSleep">Pre sleep</label>
+			  	<input name="preSleep" [(ngModel)]="form.preSleep">
+			  </div>
+			  <div class="form-field">
+			  	<label for="sleep">Sleep</label>
+			  	<input name="sleep" [(ngModel)]="form.sleep">
+			  </div>
+			  <div class="form-field">
+			  	<label for="wakeUp">Wake up</label>
+			  	<input name="wakeUp" [(ngModel)]="form.wakeUp">
+			  </div>
+			  <div class="form-field">
+			  	<div class="btn-group">
+				  	<button (click)="goBack()">Cancel</button>
+				  	<button (click)="save()">Save</button>
+				</div>
+			  </div>
+		  </div>
+		</div>
+	</app-modal>
+</div>
+
+<!--
+>
+	
+-->

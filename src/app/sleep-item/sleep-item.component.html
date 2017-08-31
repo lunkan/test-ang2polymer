@@ -1,0 +1,7 @@
+<td>{{sleep.id}}</td>
+<td>{{sleep.preSleep | dateMoment:'HH:mm'}}</td>
+<td>{{sleep.sleep | dateMoment:'HH:mm'}}</td>
+<td>{{sleep.wakeUp | dateMoment:'HH:mm'}}</td>
+<td>
+	<a [routerLink]="['./edit', sleep.id]">Edit</a>
+</td>

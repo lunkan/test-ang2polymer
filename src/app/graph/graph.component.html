@@ -1,0 +1,33 @@
+<router-outlet></router-outlet>
+<icon-toggle [toggleIcon]="polyfillMsg" (testClick)="onClickTest($event)">
+	<div slot="header">My Header</div>
+	<div slot="content">
+		<div *ngFor="let clickMsg of clickCount">{{clickMsg}}</div>
+	</div>
+</icon-toggle>
+<paper-button raised class="indigo">raised</paper-button>
+<div *ngFor="let entry of sleeps | async | mapEntries">
+	<sticky-element>
+		<div style="background-color:#000;color:#fff;">
+			<div style="padding:5px;">{{entry.key}}</div>
+			<div style="display:flex;flex-direction:row;padding-bottom:5px;padding-top:5px;">
+				<div (click)="setOrderBy('id')" style="width:20%;">ID</div>
+				<div (click)="setOrderBy('preSleep')" style="width:20%;">Presleep</div>
+				<div (click)="setOrderBy('sleep')" style="width:20%;">Sleep</div>
+				<div (click)="setOrderBy('wakeUp')" style="width:20%;">wakeUp</div>
+			</div>
+		</div>
+	</sticky-element>
+	<table>
+		<colgroup>
+    		<col span="1" style="width:20%;">
+    		<col span="1" style="width:20%;">
+    		<col span="1" style="width:20%;">
+    		<col span="1" style="width:20%;">
+  		</colgroup>
+  		<tbody>
+			<tr *ngFor="let item of entry.value | orderBy: orderBy" sleep-item [sleep]="item"></tr>
+		</tbody>
+	</table>
+<div>
+

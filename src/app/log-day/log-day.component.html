@@ -1,0 +1,18 @@
+<div class="log-day">
+	<div class="log-day__header">
+		<h3>{{date | dateMoment:'dddd D'}}</h3>
+		<button (click)="onClick($event)">{{displayContent ? 'Close' : 'Open'}}</button>
+	</div>
+	<div class="log-day__content" *ngIf="displayContent">
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Presleep</th>
+				<th>Sleep</th>
+				<th>wakeUp</th>
+				<th></th>
+			</tr>
+			<tr sleep-item *ngFor="let item of items | mapValues" [sleep]="item"></tr>
+		</table>
+	<div>
+</div>

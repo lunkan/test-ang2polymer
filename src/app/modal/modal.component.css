@@ -1,0 +1,7 @@
+:host {
+	background-color: rgb(255, 255, 255);
+    display: block;
+    margin: 50px auto;
+    max-width: 500px;
+    padding: 20px;
+}

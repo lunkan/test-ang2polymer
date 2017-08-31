@@ -1,0 +1,15 @@
+{
+  "name": "sleep-app",
+  "description": "",
+  "main": "",
+  "authors": [
+    "lunkan <jonas.lunkan@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.2",
+    "paper-input": "PolymerElements/paper-input#^2.0.1",
+    "paper-button": "PolymerElements/paper-button#^2.0.0"
+  }
+}

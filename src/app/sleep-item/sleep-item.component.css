@@ -1,0 +1,8 @@
+:host {
+	background-color: #fff;
+	transition: background-color ease-in-out 0.5s;
+}
+
+:host(.changed) {
+	background-color: #ff0000;
+}

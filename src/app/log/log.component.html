@@ -1,0 +1,6 @@
+<router-outlet></router-outlet>
+
+<div *ngFor="let entry of sleepLog | async | mapEntries">
+  <log-week [date]="entry.key" [days]="entry.value"><log-week>
+<div>
+

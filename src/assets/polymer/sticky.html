@@ -1,0 +1,60 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="sticky-element">
+  <template>
+
+    <style>
+      /* shadow DOM styles go here */
+      :host {
+        display: block;
+      }
+    </style>
+
+    <!-- shadow DOM goes here -->
+    <slot></slot>
+  </template>
+
+  <script>
+    class Sticky extends Polymer.Element {
+      static get is() {
+        return 'sticky-element';
+      }
+      constructor() {
+        super();
+        this.bindedOnDbClick = this.onDbClick.bind(this);
+        this.isSticky = false;
+      }
+      ready() {
+        super.ready();
+        window.addEventListener("scroll", this.validateSticky.bind(this));
+      }
+      onDbClick() {
+        window.scroll(0, this.offsetTop);
+      }
+      validateSticky(e) {
+        let elmScrolloffset = this.offsetTop - (document.documentElement.scrollTop || document.body.scrollTop);
+        this.setSticky(elmScrolloffset < 0);
+      }
+      setSticky(isSticky) {
+        if(isSticky === this.isSticky) {
+          return;
+        } else if(isSticky) {
+          this.style.height = this.offsetHeight + 'px';
+          this.elm = this.children[0];
+          this.elm.addEventListener("dblclick", this.bindedOnDbClick);
+          stickyMediator.registerElement(this.children[0]);
+          this.isSticky = true;
+        } else {
+          this.elm.removeEventListener("dblclick", this.bindedOnDbClick);
+          this.appendChild(this.elm);
+          this.style.height = 'auto';
+          this.isSticky = false;
+        }
+      }
+    }
+
+    customElements.define(Sticky.is, Sticky);
+  </script>
+
+</dom-module>
+

@@ -1,0 +1,4 @@
+<h2>Week {{date | dateMoment:'W MMM YYYY'}}</h2>
+<div *ngFor="let entry of days | mapEntries">
+  <log-day [date]="entry.key" [items]="entry.value"><log-week>
+<div>

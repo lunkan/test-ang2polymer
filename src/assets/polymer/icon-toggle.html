@@ -1,0 +1,122 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+
+<dom-module id="icon-toggle">
+  <div>light dom</div>
+  <template>
+
+    <style>
+      /* shadow DOM styles go here */
+      :host {
+        display: block;
+      }
+      iron-icon {
+        fill: var(--icon-toggle-color, rgba(0,0,0,0));
+        stroke: var(--icon-toggle-outline-color, currentcolor);
+      }
+      :host([pressed]) iron-icon {
+        fill: var(--icon-toggle-pressed-color, currentcolor);
+      }
+    </style>
+
+    <!-- shadow DOM goes here -->
+    <div>
+      <div id="movedContent"></div>
+      <slot name="header" id="myHeader"></slot>
+      <p>My message [[toggleIcon]]</p>
+      <!--<slot name="content">
+        <div>default content</div>
+      </slot>-->
+    </div>
+    <!--<iron-icon icon="[[toggleIcon]]">
+    </iron-icon>-->
+  </template>
+
+  <script>
+    class IconToggle extends Polymer.GestureEventListeners(Polymer.Element) {
+      static get is() {
+        return 'icon-toggle';
+      }
+      static get properties() {
+        return {
+          pressed: {
+            type: Boolean,
+            notify: true,
+            reflectToAttribute: true,
+            value: false
+          },
+          toggleIcon: {
+            type: String,
+            //notify: true,
+            //reflectToAttribute: true,
+            //observer: '_calculateToggleMsg',
+            //value: 'test'
+          },
+        }
+      }
+      constructor() {
+        super();
+        Polymer.Gestures.addListener(this, 'tap', () => this.toggle());
+
+        console.log('construct', this, this.children);
+        //console.log('construct', this, this.shadowRoot, this.querySelector('::shadow slot'));
+        //document.querySelector('core-scaffold::shadow .someclass')
+
+        //console.log("init", this, this.shadowRoot, this.querySelector('slot'));
+
+/*        HTMLSlotElement.assignedNodes method returns the list of nodes associated with a given slot. When called with the {flatten: true} option, returns the distributed nodes for a slot.
+//HTMLSlotElement.slotchange event is fired when a slot's distributed nodes change.*/
+
+        //var headerSlotElm = Polymer.dom(this.root).querySelector('#myHeader');
+        //console.log("selected slot", headerSlotElm, this.shadowRoot);
+
+      }
+      ready() {
+        super.ready();
+        //this.movedContentElm = this.$.movedContent;
+        this.headerSlotElm = this.shadowRoot.querySelector('[name="content"]');
+
+        //console.log("assigned", this.movedContentElm, this.headerSlotElm.assignedNodes(), this.headerSlotElm.assignedNodes({flatten:true}));
+
+        //this.headerSlotElm.addEventListener('slotchange', () => {console.log('slot changed', 'e')});
+
+        //let headerSlotCloneElm = this.headerSlotElm.cloneNode(true);
+
+
+        // Create a box to copy:
+        /*var referenceBox = document.createElement('div');
+        for (var i = 0; i < this.headerSlotElm.childNodes.length; i++) { // <-- change <= to <
+          referenceBox.appendChild(this.headerSlotElm.childNodes[i].cloneNode(true)); // <-- add cloneNode(true); to clone node and all its children
+        }*/
+
+        let cloneNode = this.children[1].cloneNode(true);
+        console.log('cloneNode', cloneNode, this.$.movedContent);
+        stickyMediator.registerElement(this.children[1]);//referenceBox);
+        this.$.movedContent.appendChild(cloneNode);//this.headerSlotElm);
+
+        //console.log("StickyMediator???", StickyMediator);
+
+        //console.log('construct', this, );
+      }
+      toggle() {
+        this.pressed = !this.pressed;
+
+        //handleClick(e) {
+        this.dispatchEvent(new CustomEvent('testClick', {detail: {clicked: true}}));
+        //console.log("toggle", this.headerSlotElm.assignedNodes(), this.headerSlotElm.assignedNodes({flatten:true}));
+      }
+      _calculateToggleMsg() {
+        console.log("oha imhere", this.toggleIcon);
+        this.toggleIcon = "refreched";
+        /*if (!this.raised) {
+          this._setElevation(0);
+        } else {
+          Polymer.PaperButtonBehaviorImpl._calculateElevation.apply(this);
+        }*/
+      }
+    }
+    customElements.define(IconToggle.is, IconToggle);
+  </script>
+
+</dom-module>
+

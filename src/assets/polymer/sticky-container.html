@@ -1,0 +1,76 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+
+<script>
+class StickyMediator {
+  
+  constructor() {
+    this.subscribers = [];
+  }
+
+  registerElement(elm) {
+    this.subscribers.forEach(callback => callback(elm));
+  }
+
+  subscribe(callback) {
+    this.subscribers.push(callback);
+  }
+}
+
+var stickyMediator = new StickyMediator();
+</script>
+
+<dom-module id="sticky-container">
+
+  <template>
+
+    <style>
+      /* shadow DOM styles go here */
+      :host {
+        display: block;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        right: 0;
+      }
+    </style>
+
+    <!-- shadow DOM goes here -->
+    <div id="stickyContent"></div>
+  </template>
+
+  <script>
+    class StickyContainer extends Polymer.Element {
+
+      static get is() {
+        return 'sticky-container';
+      }
+
+      static get properties() {
+        return {
+          offset: {
+            type: String
+          }
+        }
+      }
+
+      constructor() {
+        super();
+
+        stickyMediator.subscribe(this.onRegisterStickyElement.bind(this));
+      }
+
+      onRegisterStickyElement(elm) {
+        //console.log('onRegisterStickyElement', elm, this);
+
+        this.$.stickyContent.appendChild(elm);
+      }
+
+    }
+
+    customElements.define(StickyContainer.is, StickyContainer);
+  </script>
+
+</dom-module>
+

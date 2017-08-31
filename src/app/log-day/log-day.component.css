@@ -1,0 +1,22 @@
+:host {
+	font-family: Arial;
+	text-align: left;
+	font-size: 14px;
+}
+:host >>> .log-day__header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 8px 16px;
+	border-bottom: solid 1px #ccc;
+}
+:host >>> table {
+	width: 100%;
+	border-collapse: collapse;
+}
+:host >>> tr {
+	border-bottom: solid 1px #ccc;
+}
+:host >>> td, th {
+	padding: 8px 16px;
+}
